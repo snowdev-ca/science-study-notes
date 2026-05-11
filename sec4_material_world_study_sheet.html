@@ -1,0 +1,370 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+.nav{display:flex;gap:6px;flex-wrap:wrap;padding:1rem 0 0.5rem}
+.nav-btn{padding:7px 14px;font-size:13px;border:0.5px solid var(--color-border-secondary);border-radius:20px;background:var(--color-background-primary);color:var(--color-text-secondary);cursor:pointer;transition:all 0.15s;font-family:var(--font-sans)}
+.nav-btn:hover{background:var(--color-background-secondary)}
+.nav-btn.active{background:var(--color-text-primary);color:var(--color-background-primary);border-color:var(--color-text-primary)}
+.chapter{display:none}
+.chapter.active{display:block}
+.section-title{font-size:13px;font-weight:500;color:var(--color-text-secondary);letter-spacing:0.06em;text-transform:uppercase;margin:1.5rem 0 0.75rem;padding-bottom:6px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:10px;margin-bottom:1rem}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem}
+.card-label{font-size:12px;color:var(--color-text-secondary);margin-bottom:4px;font-weight:500}
+.card-value{font-size:22px;font-weight:500;color:var(--color-text-primary)}
+.card-sub{font-size:13px;color:var(--color-text-secondary);margin-top:2px}
+.def-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:1rem}
+.def-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:0.9rem 1rem}
+.def-term{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:3px}
+.def-body{font-size:13px;color:var(--color-text-secondary);line-height:1.6}
+.table-wrap{overflow-x:auto;margin-bottom:1rem}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;padding:8px 10px;border-bottom:0.5px solid var(--color-border-secondary);font-weight:500;color:var(--color-text-secondary);white-space:nowrap}
+td{padding:8px 10px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-primary);vertical-align:top}
+tr:last-child td{border-bottom:none}
+.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:500}
+.badge-yes{background:var(--color-background-success);color:var(--color-text-success)}
+.badge-no{background:var(--color-background-danger);color:var(--color-text-danger)}
+.badge-info{background:var(--color-background-info);color:var(--color-text-info)}
+.formula-box{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:0.75rem 1rem;font-family:var(--font-mono);font-size:14px;color:var(--color-text-primary);margin-bottom:8px;border-left:3px solid var(--color-border-info)}
+.alert{border-radius:var(--border-radius-md);padding:0.75rem 1rem;font-size:13px;line-height:1.6;margin-bottom:10px}
+.alert-info{background:var(--color-background-info);color:var(--color-text-info)}
+.alert-warn{background:var(--color-background-warning);color:var(--color-text-warning)}
+.alert-success{background:var(--color-background-success);color:var(--color-text-success)}
+.quiz-btn{display:inline-block;margin-top:10px;padding:7px 16px;border:0.5px solid var(--color-border-secondary);border-radius:20px;font-size:13px;cursor:pointer;background:var(--color-background-primary);color:var(--color-text-secondary);font-family:var(--font-sans)}
+.quiz-btn:hover{background:var(--color-background-secondary)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1rem}
+@media(max-width:500px){.two-col{grid-template-columns:1fr}.cards{grid-template-columns:1fr}}
+.tag{display:inline-block;padding:1px 7px;border-radius:4px;font-size:11px;margin-right:4px;margin-bottom:3px;font-weight:500}
+.tag-blue{background:#B5D4F4;color:#0C447C}
+.tag-green{background:#C0DD97;color:#3B6D11}
+.tag-amber{background:#FAC775;color:#854F0B}
+.tag-coral{background:#F5C4B3;color:#993C1D}
+.tag-purple{background:#CECBF6;color:#3C3489}
+.step{display:flex;gap:12px;align-items:flex-start;margin-bottom:10px}
+.step-num{min-width:28px;height:28px;border-radius:50%;background:var(--color-background-secondary);border:0.5px solid var(--color-border-secondary);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:var(--color-text-secondary);flex-shrink:0}
+.step-body{font-size:13px;color:var(--color-text-primary);line-height:1.6;padding-top:4px}
+</style>
+
+<h2 class="sr-only">Sec 4 Science and Technology — Material World review sheet covering all 5 chapters</h2>
+
+<div class="nav">
+  <button class="nav-btn active" onclick="show('ch1',this)">Ch 1 — Properties of matter</button>
+  <button class="nav-btn" onclick="show('ch2',this)">Ch 2 — Atoms & periodic table</button>
+  <button class="nav-btn" onclick="show('ch3',this)">Ch 3 — Chemical changes</button>
+  <button class="nav-btn" onclick="show('ch4',this)">Ch 4 — Electrochemistry</button>
+  <button class="nav-btn" onclick="show('ch5',this)">Ch 5 — Organic chemistry</button>
+</div>
+
+<!-- CH 1 -->
+<div class="chapter active" id="ch1">
+  <p class="section-title">States of matter & phase changes</p>
+  <div class="def-grid">
+    <div class="def-card"><div class="def-term">Solid</div><div class="def-body">Definite shape and volume. Particles vibrate in fixed positions. Incompressible.</div></div>
+    <div class="def-card"><div class="def-term">Liquid</div><div class="def-body">Definite volume, no fixed shape. Particles slide past each other. Slightly compressible.</div></div>
+    <div class="def-card"><div class="def-term">Gas</div><div class="def-body">No fixed shape or volume. Particles move rapidly and independently. Highly compressible.</div></div>
+    <div class="def-card"><div class="def-term">Plasma</div><div class="def-body">Ionized gas with free electrons. Found in stars and lightning. 4th state of matter.</div></div>
+  </div>
+
+  <p class="section-title">Phase change vocabulary</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Transition</th><th>Direction</th><th>Energy</th></tr></thead>
+      <tbody>
+        <tr><td>Fusion (melting)</td><td>Solid → Liquid</td><td>Absorbed</td></tr>
+        <tr><td>Solidification (freezing)</td><td>Liquid → Solid</td><td>Released</td></tr>
+        <tr><td>Vaporization</td><td>Liquid → Gas</td><td>Absorbed</td></tr>
+        <tr><td>Condensation</td><td>Gas → Liquid</td><td>Released</td></tr>
+        <tr><td>Sublimation</td><td>Solid → Gas</td><td>Absorbed</td></tr>
+        <tr><td>Deposition</td><td>Gas → Solid</td><td>Released</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="section-title">Physical properties</p>
+  <div class="def-grid">
+    <div class="def-card"><div class="def-term">Density</div><div class="def-body">Mass per unit volume. d = m ÷ V (g/cm³ or kg/m³). Intensive property — doesn't change with amount.</div></div>
+    <div class="def-card"><div class="def-term">Melting/boiling point</div><div class="def-body">Temperature at which a substance changes state. Unique to each pure substance — used for identification.</div></div>
+    <div class="def-card"><div class="def-term">Solubility</div><div class="def-body">Max amount of solute that dissolves in a solvent at a given temperature. Increases with temp for most solids; decreases for gases.</div></div>
+    <div class="def-card"><div class="def-term">Electrical conductivity</div><div class="def-body">Ability to conduct electricity. Metals conduct well; ionic compounds conduct when dissolved or melted.</div></div>
+  </div>
+
+  <p class="section-title">Pure substances vs. mixtures</p>
+  <div class="two-col">
+    <div class="card">
+      <div class="def-term" style="margin-bottom:8px">Pure substance</div>
+      <div class="def-body" style="margin-bottom:6px">Uniform composition throughout. Fixed physical properties.</div>
+      <span class="tag tag-blue">Elements</span>
+      <span class="tag tag-blue">Compounds</span>
+    </div>
+    <div class="card">
+      <div class="def-term" style="margin-bottom:8px">Mixture</div>
+      <div class="def-body" style="margin-bottom:6px">Two or more substances combined. Can be separated by physical means.</div>
+      <span class="tag tag-green">Homogeneous</span>
+      <span class="tag tag-amber">Heterogeneous</span>
+    </div>
+  </div>
+
+  <p class="section-title">Separation techniques</p>
+  <div class="def-grid">
+    <div class="def-card"><div class="def-term">Filtration</div><div class="def-body">Separates insoluble solid from a liquid using a filter.</div></div>
+    <div class="def-card"><div class="def-term">Distillation</div><div class="def-body">Separates liquids with different boiling points by evaporation + condensation.</div></div>
+    <div class="def-card"><div class="def-term">Evaporation</div><div class="def-body">Removes liquid solvent to recover dissolved solid.</div></div>
+    <div class="def-card"><div class="def-term">Chromatography</div><div class="def-body">Separates substances based on their affinity for stationary vs. mobile phase.</div></div>
+    <div class="def-card"><div class="def-term">Decantation</div><div class="def-body">Carefully pouring off a liquid to separate it from settled solid or denser liquid.</div></div>
+    <div class="def-card"><div class="def-term">Centrifugation</div><div class="def-body">Spins mixture at high speed; denser components settle faster to the bottom.</div></div>
+  </div>
+
+  <button class="quiz-btn" onclick="sendPrompt('Quiz me on Chapter 1 — Properties of Matter for Sec 4 ST ↗')">Test me on chapter 1 ↗</button>
+</div>
+
+<!-- CH 2 -->
+<div class="chapter" id="ch2">
+  <p class="section-title">Atomic model</p>
+  <div class="def-grid">
+    <div class="def-card"><div class="def-term">Proton</div><div class="def-body">Positive charge (+1). Found in nucleus. Number = atomic number (Z). Defines the element.</div></div>
+    <div class="def-card"><div class="def-term">Neutron</div><div class="def-body">No charge. Found in nucleus. Mass ≈ proton. Number = A − Z (mass number − atomic number).</div></div>
+    <div class="def-card"><div class="def-term">Electron</div><div class="def-body">Negative charge (−1). Orbits in energy levels. Number = protons in neutral atom. Determines bonding.</div></div>
+    <div class="def-card"><div class="def-term">Nucleus</div><div class="def-body">Dense core containing protons and neutrons. Positively charged overall. Tiny compared to atom's volume.</div></div>
+  </div>
+
+  <div class="alert alert-info">
+    <strong>Key notation:</strong> ᴬ₍Z₎X — A = mass number (p⁺ + n⁰), Z = atomic number (p⁺). Example: ¹²₆C = 6 protons, 6 neutrons, 6 electrons.
+  </div>
+
+  <p class="section-title">Electron configuration (energy levels)</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Level</th><th>Max electrons</th><th>Shell</th></tr></thead>
+      <tbody>
+        <tr><td>1st</td><td>2</td><td>K</td></tr>
+        <tr><td>2nd</td><td>8</td><td>L</td></tr>
+        <tr><td>3rd</td><td>8 (or 18 for transition metals)</td><td>M</td></tr>
+        <tr><td>Valence</td><td>= last shell electrons</td><td>Determines reactivity</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="section-title">Periodic table organization</p>
+  <div class="two-col">
+    <div class="card">
+      <div class="def-term" style="margin-bottom:8px">Periods (rows)</div>
+      <div class="def-body">Period # = number of electron shells. Going right across a period: atomic number increases, atomic radius decreases, electronegativity increases.</div>
+    </div>
+    <div class="card">
+      <div class="def-term" style="margin-bottom:8px">Groups (columns)</div>
+      <div class="def-body">Group # = number of valence electrons (for main groups). Elements in same group have similar chemical properties.</div>
+    </div>
+  </div>
+
+  <p class="section-title">Key groups to know</p>
+  <div class="def-grid">
+    <div class="def-card"><div class="def-term">Group 1 — Alkali metals</div><div class="def-body">1 valence electron. Very reactive. React violently with water. Soft metals.</div></div>
+    <div class="def-card"><div class="def-term">Group 17 — Halogens</div><div class="def-body">7 valence electrons. Highly reactive non-metals. Form −1 ions easily. Example: F, Cl, Br.</div></div>
+    <div class="def-card"><div class="def-term">Group 18 — Noble gases</div><div class="def-body">Full valence shell. Extremely stable and unreactive. Used as inert atmospheres.</div></div>
+    <div class="def-card"><div class="def-term">Transition metals</div><div class="def-body">Groups 3–12. Variable oxidation states. Good conductors. Form coloured compounds.</div></div>
+  </div>
+
+  <p class="section-title">Types of chemical bonds</p>
+  <div class="def-grid">
+    <div class="def-card"><div class="def-term">Ionic bond</div><div class="def-body">Transfer of electrons from metal to non-metal. Creates oppositely charged ions held by electrostatic attraction. High melting point.</div></div>
+    <div class="def-card"><div class="def-term">Covalent bond</div><div class="def-body">Sharing of electron pairs between non-metals. Can be single, double, or triple bonds. Lower melting point.</div></div>
+    <div class="def-card"><div class="def-term">Metallic bond</div><div class="def-body">Positive metal ions in a sea of delocalized electrons. Explains conductivity, malleability, and lustre of metals.</div></div>
+  </div>
+
+  <p class="section-title">Isotopes</p>
+  <div class="alert alert-warn">
+    Isotopes are atoms of the same element (same Z) with different numbers of neutrons (different A). Example: ¹²C and ¹⁴C are both carbon. Atomic mass on the table is the weighted average of natural isotopes.
+  </div>
+
+  <button class="quiz-btn" onclick="sendPrompt('Quiz me on Chapter 2 — Atoms and the Periodic Table for Sec 4 ST ↗')">Test me on chapter 2 ↗</button>
+</div>
+
+<!-- CH 3 -->
+<div class="chapter" id="ch3">
+  <p class="section-title">Physical vs. chemical changes</p>
+  <div class="two-col">
+    <div class="card">
+      <div class="def-term" style="margin-bottom:6px">Physical change</div>
+      <div class="def-body">No new substance formed. Only state, shape, or size changes. Reversible in most cases. Examples: melting, dissolving, cutting.</div>
+    </div>
+    <div class="card">
+      <div class="def-term" style="margin-bottom:6px">Chemical change</div>
+      <div class="def-body">New substance(s) formed. Original substance is consumed. Usually irreversible. Examples: combustion, rusting, photosynthesis.</div>
+    </div>
+  </div>
+
+  <p class="section-title">Signs of a chemical reaction</p>
+  <div class="def-grid">
+    <div class="def-card"><div class="def-term">Gas production</div><div class="def-body">Bubbles or fizzing observed. Example: acid + carbonate → CO₂.</div></div>
+    <div class="def-card"><div class="def-term">Precipitate formation</div><div class="def-body">Insoluble solid appears in a solution. Indicates ions have combined.</div></div>
+    <div class="def-card"><div class="def-term">Colour change</div><div class="def-body">A new substance with different light absorption is produced.</div></div>
+    <div class="def-card"><div class="def-term">Temperature change</div><div class="def-body">Exothermic (releases heat) or endothermic (absorbs heat) reactions.</div></div>
+  </div>
+
+  <p class="section-title">Types of chemical reactions</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Type</th><th>General form</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td>Synthesis</td><td>A + B → AB</td><td>2H₂ + O₂ → 2H₂O</td></tr>
+        <tr><td>Decomposition</td><td>AB → A + B</td><td>2H₂O₂ → 2H₂O + O₂</td></tr>
+        <tr><td>Simple replacement</td><td>A + BC → AC + B</td><td>Zn + 2HCl → ZnCl₂ + H₂</td></tr>
+        <tr><td>Double replacement</td><td>AB + CD → AD + CB</td><td>NaCl + AgNO₃ → NaNO₃ + AgCl↓</td></tr>
+        <tr><td>Combustion</td><td>Fuel + O₂ → CO₂ + H₂O</td><td>CH₄ + 2O₂ → CO₂ + 2H₂O</td></tr>
+        <tr><td>Neutralization</td><td>Acid + Base → Salt + H₂O</td><td>HCl + NaOH → NaCl + H₂O</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="section-title">Balancing equations — the method</p>
+  <div class="step"><div class="step-num">1</div><div class="step-body">Write the unbalanced equation with correct formulas. Never change subscripts — only add coefficients.</div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body">Count each element on both sides. Start with elements that appear least often (save H and O for last).</div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body">Add coefficients in front of molecules until both sides have equal atom counts.</div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body">Verify: same number of each atom on each side. Coefficients must be the smallest whole-number ratio.</div></div>
+
+  <p class="section-title">Acids and bases (pH)</p>
+  <div class="def-grid">
+    <div class="def-card"><div class="def-term">Acid</div><div class="def-body">Releases H⁺ ions in water. pH &lt; 7. Turns litmus red. Tastes sour. Examples: HCl, H₂SO₄, vinegar.</div></div>
+    <div class="def-card"><div class="def-term">Base</div><div class="def-body">Releases OH⁻ ions in water. pH &gt; 7. Turns litmus blue. Feels slippery. Examples: NaOH, NH₃.</div></div>
+    <div class="def-card"><div class="def-term">Neutral</div><div class="def-body">pH = 7. Neither acidic nor basic. Pure water at 25 °C.</div></div>
+    <div class="def-card"><div class="def-term">Indicators</div><div class="def-body">Substances that change colour with pH. Examples: litmus, phenolphthalein, universal indicator.</div></div>
+  </div>
+
+  <div class="alert alert-warn">
+    pH scale goes 0–14. Each unit = 10× difference in H⁺ concentration. pH 3 is 10× more acidic than pH 4, and 100× more acidic than pH 5.
+  </div>
+
+  <p class="section-title">Law of conservation of mass</p>
+  <div class="alert alert-success">
+    Mass of reactants = mass of products. Atoms are neither created nor destroyed — only rearranged. This is why equations must be balanced.
+  </div>
+
+  <button class="quiz-btn" onclick="sendPrompt('Quiz me on Chapter 3 — Chemical Changes for Sec 4 ST ↗')">Test me on chapter 3 ↗</button>
+</div>
+
+<!-- CH 4 -->
+<div class="chapter" id="ch4">
+  <p class="section-title">Core concepts</p>
+  <div class="def-grid">
+    <div class="def-card"><div class="def-term">Oxidation</div><div class="def-body">Loss of electrons. Oxidation number increases. The species being oxidized is the reducing agent.</div></div>
+    <div class="def-card"><div class="def-term">Reduction</div><div class="def-body">Gain of electrons. Oxidation number decreases. The species being reduced is the oxidizing agent.</div></div>
+    <div class="def-card"><div class="def-term">Redox reaction</div><div class="def-body">Simultaneous oxidation and reduction. Electrons are transferred from one species to another.</div></div>
+    <div class="def-card"><div class="def-term">Electrolyte</div><div class="def-body">Substance that conducts electricity when dissolved (ions carry the charge). Examples: NaCl(aq), H₂SO₄(aq).</div></div>
+  </div>
+
+  <div class="alert alert-info">
+    Memory trick: <strong>OIL RIG</strong> — Oxidation Is Loss, Reduction Is Gain (of electrons).
+  </div>
+
+  <p class="section-title">Electrochemical cells</p>
+  <div class="two-col">
+    <div class="card">
+      <div class="def-term" style="margin-bottom:8px">Galvanic (voltaic) cell</div>
+      <div class="def-body">Converts chemical energy → electrical energy. Spontaneous reaction. Produces a current. Example: a battery.</div>
+      <div style="margin-top:8px"><span class="tag tag-green">Anode (−)</span><span class="tag tag-blue">Cathode (+)</span></div>
+    </div>
+    <div class="card">
+      <div class="def-term" style="margin-bottom:8px">Electrolytic cell</div>
+      <div class="def-body">Converts electrical energy → chemical energy. Non-spontaneous. Requires external power source. Example: electroplating, electrolysis of water.</div>
+      <div style="margin-top:8px"><span class="tag tag-coral">Anode (+)</span><span class="tag tag-purple">Cathode (−)</span></div>
+    </div>
+  </div>
+
+  <p class="section-title">Key cell components</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Component</th><th>Role</th><th>Where electrons go</th></tr></thead>
+      <tbody>
+        <tr><td>Anode</td><td>Oxidation half-reaction occurs</td><td>Electrons leave the anode</td></tr>
+        <tr><td>Cathode</td><td>Reduction half-reaction occurs</td><td>Electrons arrive at the cathode</td></tr>
+        <tr><td>Salt bridge</td><td>Allows ion flow to maintain charge balance</td><td>—</td></tr>
+        <tr><td>External wire</td><td>Carries electron flow between electrodes</td><td>Anode → cathode</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="section-title">Activity series (metals)</p>
+  <div class="alert alert-warn">
+    The activity series ranks metals by their tendency to lose electrons (be oxidized). A more active metal displaces a less active one from solution. Example: Zn is above Cu, so Zn displaces Cu²⁺ from solution.<br><br>
+    Most active → least active (simplified): Li, K, Ca, Na, Mg, Al, Zn, Fe, Ni, Sn, Pb, <strong>H</strong>, Cu, Ag, Au
+  </div>
+
+  <p class="section-title">Corrosion & protection</p>
+  <div class="def-grid">
+    <div class="def-card"><div class="def-term">Corrosion</div><div class="def-body">Oxidation of a metal by its environment (water, oxygen). Iron rusting = formation of Fe₂O₃·xH₂O.</div></div>
+    <div class="def-card"><div class="def-term">Cathodic protection</div><div class="def-body">Attach a more active metal (sacrificial anode) to the metal you want to protect. The active metal oxidizes instead.</div></div>
+    <div class="def-card"><div class="def-term">Electroplating</div><div class="def-body">Uses electrolysis to coat an object with a thin metal layer. Object = cathode. Plating metal = anode.</div></div>
+  </div>
+
+  <button class="quiz-btn" onclick="sendPrompt('Quiz me on Chapter 4 — Electrochemistry for Sec 4 ST ↗')">Test me on chapter 4 ↗</button>
+</div>
+
+<!-- CH 5 -->
+<div class="chapter" id="ch5">
+  <p class="section-title">What is organic chemistry?</p>
+  <div class="alert alert-info">
+    Organic chemistry is the study of carbon-containing compounds. Carbon forms 4 bonds, allowing chains, branches, and rings. Carbon backbones can be saturated (only C–C single bonds) or unsaturated (contain C=C or C≡C).
+  </div>
+
+  <p class="section-title">Families of organic compounds (homologous series)</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Family</th><th>Functional group</th><th>General formula</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td>Alkanes</td><td>None (C–C only)</td><td>CₙH₂ₙ₊₂</td><td>CH₄ methane</td></tr>
+        <tr><td>Alkenes</td><td>C=C double bond</td><td>CₙH₂ₙ</td><td>C₂H₄ ethylene</td></tr>
+        <tr><td>Alkynes</td><td>C≡C triple bond</td><td>CₙH₂ₙ₋₂</td><td>C₂H₂ acetylene</td></tr>
+        <tr><td>Alcohols</td><td>–OH</td><td>CₙH₂ₙ₊₁OH</td><td>CH₃OH methanol</td></tr>
+        <tr><td>Carboxylic acids</td><td>–COOH</td><td>CₙH₂ₙ₊₁COOH</td><td>CH₃COOH acetic acid</td></tr>
+        <tr><td>Esters</td><td>–COO–</td><td>R–COO–R'</td><td>Ethyl acetate (fragrance)</td></tr>
+        <tr><td>Amines</td><td>–NH₂</td><td>R–NH₂</td><td>CH₃NH₂ methylamine</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="section-title">Naming alkanes (IUPAC)</p>
+  <div class="step"><div class="step-num">1</div><div class="step-body">Find the longest continuous carbon chain. This gives the parent name: meth(1), eth(2), prop(3), but(4), pent(5), hex(6), hept(7), oct(8).</div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body">Number the chain from the end closest to any branch or functional group.</div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body">Name each branch as an alkyl group (methyl, ethyl, propyl…) with its position number.</div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body">List substituents alphabetically. Add suffix: -ane (alkane), -ene (alkene), -yne (alkyne), -ol (alcohol).</div></div>
+
+  <p class="section-title">Isomers</p>
+  <div class="two-col">
+    <div class="card">
+      <div class="def-term" style="margin-bottom:6px">Structural isomers</div>
+      <div class="def-body">Same molecular formula, different connectivity. Example: butane (C₄H₁₀) and 2-methylpropane both have formula C₄H₁₀ but different structures.</div>
+    </div>
+    <div class="card">
+      <div class="def-term" style="margin-bottom:6px">Stereoisomers</div>
+      <div class="def-body">Same connectivity, different spatial arrangement. Less commonly tested at Sec 4 ST level. Cis/trans isomers around a double bond are the main example.</div>
+    </div>
+  </div>
+
+  <p class="section-title">Key organic reactions</p>
+  <div class="def-grid">
+    <div class="def-card"><div class="def-term">Combustion</div><div class="def-body">Organic compound + O₂ → CO₂ + H₂O (complete) or CO + H₂O (incomplete). Releases energy.</div></div>
+    <div class="def-card"><div class="def-term">Addition</div><div class="def-body">Two reactants combine to form one product across a double bond. Example: alkene + H₂ → alkane (hydrogenation).</div></div>
+    <div class="def-card"><div class="def-term">Substitution</div><div class="def-body">One atom or group replaces another. Common in alkanes with halogens under UV light.</div></div>
+    <div class="def-card"><div class="def-term">Esterification</div><div class="def-body">Carboxylic acid + alcohol → ester + water. Used to make perfumes, flavors, and biodiesel.</div></div>
+    <div class="def-card"><div class="def-term">Polymerization</div><div class="def-body">Monomers link to form a long chain polymer. Addition polymerization (alkenes) or condensation polymerization (loses H₂O).</div></div>
+  </div>
+
+  <p class="section-title">Petroleum & fossil fuels</p>
+  <div class="alert alert-warn">
+    Petroleum is a mixture of hydrocarbons separated by fractional distillation. Each fraction has a different boiling point range and chain length. Shorter chains = lower boiling point, more flammable. Examples: natural gas (C₁–C₄), gasoline (C₅–C₁₂), diesel (C₁₂–C₂₀), heavy fuel oil (C₂₀+).
+  </div>
+
+  <button class="quiz-btn" onclick="sendPrompt('Quiz me on Chapter 5 — Organic Chemistry for Sec 4 ST ↗')">Test me on chapter 5 ↗</button>
+</div>
+
+<script>
+function show(id,btn){
+  document.querySelectorAll('.chapter').forEach(c=>c.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
